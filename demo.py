@@ -86,18 +86,3 @@ cv2.imwrite('output2/res_gamma.jpg', result)
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
