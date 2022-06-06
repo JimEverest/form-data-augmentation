@@ -137,7 +137,7 @@ def virtual_background(
     return final_image
 
 
-def watermark(image: np.ndarray, text: str = None) -> np.ndarray:
+def watermark(image: np.ndarray, text: str = None, color = None) -> np.ndarray:
     """
     Add watermark text to an image
     Args:
@@ -148,10 +148,12 @@ def watermark(image: np.ndarray, text: str = None) -> np.ndarray:
     Returns:
         np.ndarray: BGR image with watermark added
     """
-    texts = ["confidential", "fusemachines", "official", "W2-Tax"]
+    texts = ["COPY","confidential", "fusemachines", "official", "W2-Tax"]
     if not text:
         text = np.random.choice(texts)
 
+    if color is None:
+        color = tuple(map(int, np.random.randint(0, 255, 3)))
     # choose a random location for watermark
     loc = np.random.randint(image.shape[0] // 4, image.shape[1] // 2, 2)
 
@@ -162,7 +164,7 @@ def watermark(image: np.ndarray, text: str = None) -> np.ndarray:
         tuple(loc),
         cv2.FONT_HERSHEY_PLAIN,
         20,
-        tuple(map(int, np.random.randint(0, 255, 3))),
+        color,
         15,
         cv2.LINE_AA,
     )
